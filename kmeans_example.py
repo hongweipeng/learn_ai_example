@@ -77,13 +77,13 @@ class K_means(object):
         return np.array_equal(old_centroids, centroids)
 
 
+if __name__ == "__main__":
+    iris = datasets.load_iris()
 
-iris = datasets.load_iris()
+    my_k = K_means(4)
+    my_k.fit(iris.data)
+    print(np.array(my_k.labels))
 
-my_k = K_means(4)
-my_k.fit(iris.data)
-print(np.array(my_k.labels))
-
-sk = cluster.KMeans(4)
-sk.fit(iris.data)
-print(sk.labels_)
+    sk = cluster.KMeans(4)
+    sk.fit(iris.data)
+    print(sk.labels_)
