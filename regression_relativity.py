@@ -30,11 +30,12 @@ def polyfit(x, y):
         SST += (y[i] - y_mean) ** 2
     return SSR / SST
 
-train_x = [1, 3, 8, 7, 9]
-train_y = [10, 12, 24, 21, 34]
+if __name__ == "__main__":
+    train_x = [1, 3, 8, 7, 9]
+    train_y = [10, 12, 24, 21, 34]
 
-print(computeCorrelation(train_x, train_y))
+    print(computeCorrelation(train_x, train_y))
 
-train_x_2d = [[x] for x in train_x] # 通用的方式，训练集至少是二维的
-print(polyfit(train_x_2d, train_y))
+    train_x_2d = [[x] for x in train_x] # 通用的方式，训练集至少是二维的
+    print(polyfit(train_x_2d, train_y))
 

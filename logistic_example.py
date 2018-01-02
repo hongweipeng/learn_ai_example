@@ -45,15 +45,16 @@ class LogisticReg(object):
         result = sigmoid(np.dot(row, self.theta))
         return 1 if result > 0.5 else 0
 
-mylog = LogisticReg()
-x, y = genData()
-test_row = [0.6, 12]
-mylog.fit(x, y)
-print(mylog.theta)
-print("LogisticReg predict:", mylog.predict(test_row))
+if __name__ == "__main__":
+    mylog = LogisticReg()
+    x, y = genData()
+    test_row = [0.6, 12]
+    mylog.fit(x, y)
+    print(mylog.theta)
+    print("LogisticReg predict:", mylog.predict(test_row))
 
-sk = LogisticRegression()
-sk.fit(x, y)
-print(sk.intercept_)
-print(sk.coef_)
-print("sklearn LogisticRegression predict:", sk.predict([test_row]))
+    sk = LogisticRegression()
+    sk.fit(x, y)
+    print(sk.intercept_)
+    print(sk.coef_)
+    print("sklearn LogisticRegression predict:", sk.predict([test_row]))

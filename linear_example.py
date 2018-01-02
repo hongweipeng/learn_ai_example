@@ -32,10 +32,9 @@ class MyLinearRegression(object):
 
     def fit(self, x: list, y: list):
         # 为每条数据添加 1
-        tmpx = [[1] for _ in range(len(x))]
-        for i, v in enumerate(x):
-            tmpx[i] += v
-
+        point_num, future_num = np.shape(x)
+        tmpx = np.ones(shape=(point_num, future_num + 1))
+        tmpx[:,1 :] = x
         x_mat = np.mat(tmpx)
         y_mat = np.mat(y).T
         xT = x_mat.T
@@ -44,29 +43,30 @@ class MyLinearRegression(object):
     def predict(self, x):
         return np.mat([1] + x) * self.b
 
-x = [
-    [100.0, 4.0],
-    [50.0, 3.0],
-    [100.0, 4.0],
-    [100.0, 2.0],
-    [50.0, 2.0],
-    [80.0, 2.0],
-    [75.0, 3.0],
-    [65.0, 4.0],
-    [90.0, 3.0],
-    [90.0, 2.0]
-]
+if __name__ == "__main__":
+    x = [
+        [100.0, 4.0],
+        [50.0, 3.0],
+        [100.0, 4.0],
+        [100.0, 2.0],
+        [50.0, 2.0],
+        [80.0, 2.0],
+        [75.0, 3.0],
+        [65.0, 4.0],
+        [90.0, 3.0],
+        [90.0, 2.0]
+    ]
 
-y = [9.3, 4.8, 8.9, 6.5, 4.2, 6.2, 7.4, 6.0, 7.6, 6.1]
+    y = [9.3, 4.8, 8.9, 6.5, 4.2, 6.2, 7.4, 6.0, 7.6, 6.1]
 
-test_row = [50, 3]
-linear = MyLinearRegression()
-linear.fit(x, y)
-print(linear.predict(test_row)) # [[ 4.95830457]]
+    test_row = [50, 3]
+    linear = MyLinearRegression()
+    linear.fit(x, y)
+    print(linear.predict(test_row)) # [[ 4.95830457]]
 
-sk = linear_model.LinearRegression()
-sk.fit(x, y)
-print(sk.predict([test_row])) # [ 4.95830457]
+    sk = linear_model.LinearRegression()
+    sk.fit(x, y)
+    print(sk.predict([test_row])) # [ 4.95830457]
 
 
 

@@ -84,27 +84,27 @@ class NeuralNetwork(object):
         return a
 
 
+if __name__ == "__main__":
+    nn = NeuralNetwork(layers=[64, 100, 10])
+    digits = datasets.load_digits()
+    X = digits.data
+    y = digits.target
 
-nn = NeuralNetwork(layers=[64, 100, 10])
-digits = datasets.load_digits()
-X = digits.data
-y = digits.target
+    # 拆分为训练集和测试集
+    X_train, X_test, y_train, y_test = train_test_split(X, y)
 
-# 拆分为训练集和测试集
-X_train, X_test, y_train, y_test = train_test_split(X, y)
+    # 分类结果离散化
+    labels_train = LabelBinarizer().fit_transform(y_train)
+    labels_test = LabelBinarizer().fit_transform(y_test)
 
-# 分类结果离散化
-labels_train = LabelBinarizer().fit_transform(y_train)
-labels_test = LabelBinarizer().fit_transform(y_test)
+    nn.fit(X_train, labels_train)
 
-nn.fit(X_train, labels_train)
+    # 收集测试结果
+    predictions = []
+    for i in range(X_test.shape[0]):
+        o = nn.predict(X_test[i] )
+        predictions.append(np.argmax(o))
 
-# 收集测试结果
-predictions = []
-for i in range(X_test.shape[0]):
-    o = nn.predict(X_test[i] )
-    predictions.append(np.argmax(o))
-
-# 打印对比结果
-print (confusion_matrix(y_test, predictions) )
-print (classification_report(y_test, predictions))
+    # 打印对比结果
+    print (confusion_matrix(y_test, predictions) )
+    print (classification_report(y_test, predictions))
