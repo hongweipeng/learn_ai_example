@@ -96,3 +96,5 @@ ENV/
 *.iml
 out
 gen
+test.py
+logs/
